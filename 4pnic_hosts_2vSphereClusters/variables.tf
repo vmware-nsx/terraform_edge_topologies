@@ -6,8 +6,6 @@ variable "vcenter" {
     username   = "administrator@vsphere.local"
     password   = "VMware1!"
     dc         = "SDDC"
-    cluster    = "Cluster-02a"
-    vds        = "SiteA-vDS-02"
     compute_manager_name  = "vCenter"
   }
 }
