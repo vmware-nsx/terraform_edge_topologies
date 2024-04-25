@@ -985,14 +985,14 @@ resource "vsphere_compute_cluster_vm_host_rule" "cluster1_host2" {
 }
 
 resource "vsphere_compute_cluster_vm_host_rule" "cluster2_host1" {
-  compute_cluster_id       = data.vsphere_compute_cluster.cluster1.id
+  compute_cluster_id       = data.vsphere_compute_cluster.cluster2.id
   name                     = "Edge Host 1 Edge nodes 1 and 3"
   vm_group_name            = "${vsphere_compute_cluster_vm_group.cluster2_host1.name}"
   affinity_host_group_name = "${vsphere_compute_cluster_host_group.cluster2_host1.name}"
 }
 
 resource "vsphere_compute_cluster_vm_host_rule" "cluster2_host2" {
-  compute_cluster_id       = data.vsphere_compute_cluster.cluster1.id
+  compute_cluster_id       = data.vsphere_compute_cluster.cluster2.id
   name                     = "Edge Host 2 Edge nodes 2 and 4"
   vm_group_name            = "${vsphere_compute_cluster_vm_group.cluster2_host2.name}"
   affinity_host_group_name = "${vsphere_compute_cluster_host_group.cluster2_host2.name}"
