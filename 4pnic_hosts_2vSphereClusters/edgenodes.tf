@@ -359,11 +359,19 @@ data "nsxt_policy_transport_zone" "overlay_transport_zone" {
   display_name = "nsx-overlay-transportzone"
 }
 
-resource "nsxt_policy_transport_zone" "vlan_transport_zone_edge" {
-  display_name   = "nsx-vlan-edge-transportzone"
+resource "nsxt_policy_transport_zone" "vlan_transport_zone_edge_cluster01" {
+  display_name   = "nsx-vlan-edge-transportzone-${data.vsphere_compute_cluster.cluster1.name}"
   transport_type = "VLAN_BACKED"
   uplink_teaming_policy_names = ["uplink_1_only" , "uplink_2_only" ]
 }
+
+resource "nsxt_policy_transport_zone" "vlan_transport_zone_edge_cluster02" {
+  display_name   = "nsx-vlan-edge-transportzone-${data.vsphere_compute_cluster.cluster2.name}"
+  transport_type = "VLAN_BACKED"
+  uplink_teaming_policy_names = ["uplink_1_only" , "uplink_2_only" ]
+}
+
+
 
 # ----------------------------------------------- #
 #  Compute Manager
@@ -389,7 +397,7 @@ resource "nsxt_edge_transport_node" "cluster1_edgenode1" {
       transport_zone = data.nsxt_policy_transport_zone.overlay_transport_zone.id
     }
     transport_zone_endpoint {
-      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge.realized_id
+      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge_cluster01.realized_id
     }
     host_switch_profile = [nsxt_policy_uplink_host_switch_profile.edge_uplink_profile_cluster1.realized_id]
     pnic {
@@ -438,7 +446,7 @@ resource "nsxt_edge_transport_node" "cluster1_edgenode2" {
       transport_zone = data.nsxt_policy_transport_zone.overlay_transport_zone.id
     }
     transport_zone_endpoint {
-      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge.realized_id
+      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge_cluster01.realized_id
     }
     host_switch_profile = [nsxt_policy_uplink_host_switch_profile.edge_uplink_profile_cluster1.realized_id]
     pnic {
@@ -474,6 +482,7 @@ resource "nsxt_edge_transport_node" "cluster1_edgenode2" {
     allow_ssh_root_login = var.edge_nodes["allow_ssh_root_login"]
     enable_ssh           = var.edge_nodes["enable_ssh"]
   }
+  depends_on         = [data.nsxt_transport_node_realization.cluster1_edgenode1_realization]
 }
 
 
@@ -494,7 +503,7 @@ resource "nsxt_edge_transport_node" "cluster1_edgenode3" {
       transport_zone = data.nsxt_policy_transport_zone.overlay_transport_zone.id
     }
     transport_zone_endpoint {
-      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge.realized_id
+      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge_cluster01.realized_id
     }
     host_switch_profile = [nsxt_policy_uplink_host_switch_profile.edge_uplink_profile_cluster1.realized_id]
     pnic {
@@ -530,6 +539,7 @@ resource "nsxt_edge_transport_node" "cluster1_edgenode3" {
     allow_ssh_root_login = var.edge_nodes["allow_ssh_root_login"]
     enable_ssh           = var.edge_nodes["enable_ssh"]
   }
+  depends_on         = [data.nsxt_transport_node_realization.cluster1_edgenode2_realization]
 }
 
 
@@ -544,7 +554,7 @@ resource "nsxt_edge_transport_node" "cluster1_edgenode4" {
       transport_zone = data.nsxt_policy_transport_zone.overlay_transport_zone.id
     }
     transport_zone_endpoint {
-      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge.realized_id
+      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge_cluster01.realized_id
     }
     host_switch_profile = [nsxt_policy_uplink_host_switch_profile.edge_uplink_profile_cluster1.realized_id]
     pnic {
@@ -580,6 +590,7 @@ resource "nsxt_edge_transport_node" "cluster1_edgenode4" {
     allow_ssh_root_login = var.edge_nodes["allow_ssh_root_login"]
     enable_ssh           = var.edge_nodes["enable_ssh"]
   }
+  depends_on         = [data.nsxt_transport_node_realization.cluster1_edgenode3_realization]
 }
 
 
@@ -599,7 +610,7 @@ resource "nsxt_edge_transport_node" "cluster2_edgenode1" {
       transport_zone = data.nsxt_policy_transport_zone.overlay_transport_zone.id
     }
     transport_zone_endpoint {
-      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge.realized_id
+      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge_cluster02.realized_id
     }
     host_switch_profile = [nsxt_policy_uplink_host_switch_profile.edge_uplink_profile_cluster2.realized_id]
     pnic {
@@ -648,7 +659,7 @@ resource "nsxt_edge_transport_node" "cluster2_edgenode2" {
       transport_zone = data.nsxt_policy_transport_zone.overlay_transport_zone.id
     }
     transport_zone_endpoint {
-      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge.realized_id
+      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge_cluster02.realized_id
     }
     host_switch_profile = [nsxt_policy_uplink_host_switch_profile.edge_uplink_profile_cluster2.realized_id]
     pnic {
@@ -684,6 +695,7 @@ resource "nsxt_edge_transport_node" "cluster2_edgenode2" {
     allow_ssh_root_login = var.edge_nodes["allow_ssh_root_login"]
     enable_ssh           = var.edge_nodes["enable_ssh"]
   }
+  depends_on         = [data.nsxt_transport_node_realization.cluster2_edgenode1_realization]
 }
 
 
@@ -703,7 +715,7 @@ resource "nsxt_edge_transport_node" "cluster2_edgenode3" {
       transport_zone = data.nsxt_policy_transport_zone.overlay_transport_zone.id
     }
     transport_zone_endpoint {
-      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge.realized_id
+      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge_cluster02.realized_id
     }
     host_switch_profile = [nsxt_policy_uplink_host_switch_profile.edge_uplink_profile_cluster2.realized_id]
     pnic {
@@ -739,6 +751,7 @@ resource "nsxt_edge_transport_node" "cluster2_edgenode3" {
     allow_ssh_root_login = var.edge_nodes["allow_ssh_root_login"]
     enable_ssh           = var.edge_nodes["enable_ssh"]
   }
+  depends_on         = [data.nsxt_transport_node_realization.cluster2_edgenode2_realization]
 }
 
 resource "nsxt_edge_transport_node" "cluster2_edgenode4" {
@@ -752,7 +765,7 @@ resource "nsxt_edge_transport_node" "cluster2_edgenode4" {
       transport_zone = data.nsxt_policy_transport_zone.overlay_transport_zone.id
     }
     transport_zone_endpoint {
-      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge.realized_id
+      transport_zone = nsxt_policy_transport_zone.vlan_transport_zone_edge_cluster02.realized_id
     }
     host_switch_profile = [nsxt_policy_uplink_host_switch_profile.edge_uplink_profile_cluster2.realized_id]
     pnic {
@@ -788,6 +801,7 @@ resource "nsxt_edge_transport_node" "cluster2_edgenode4" {
     allow_ssh_root_login = var.edge_nodes["allow_ssh_root_login"]
     enable_ssh           = var.edge_nodes["enable_ssh"]
   }
+  depends_on         = [data.nsxt_transport_node_realization.cluster2_edgenode3_realization]
 }
 
 
@@ -997,5 +1011,3 @@ resource "vsphere_compute_cluster_vm_host_rule" "cluster2_host2" {
   vm_group_name            = "${vsphere_compute_cluster_vm_group.cluster2_host2.name}"
   affinity_host_group_name = "${vsphere_compute_cluster_host_group.cluster2_host2.name}"
 }
-
-
