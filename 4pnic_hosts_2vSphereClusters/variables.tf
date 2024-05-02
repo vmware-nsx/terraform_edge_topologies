@@ -99,6 +99,8 @@ variable "edge_nodes" {
    default = {
      password   = "VMware1!VMware1!"
      form_factor = "MEDIUM"
+     enable_t0_firewall = "false"
+     t0_urpf_mode = "NONE" #STRICT or NONE
      enable_ssh = "true"
      allow_ssh_root_login = "true"
      uplink_mtu = "9000"
