@@ -56,7 +56,8 @@ resource "nsxt_policy_tier0_gateway" "t0-gateway" {
 
   bgp_config {
     local_as_num    = var.edge_nodes.bgp_as
-    multipath_relax = false
+    multipath_relax = true
+    inter_sr_ibgp   = true
   }
 }
 
