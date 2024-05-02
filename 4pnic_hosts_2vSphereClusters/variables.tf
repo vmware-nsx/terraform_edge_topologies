@@ -93,7 +93,6 @@ variable "vsphere_edge_cluster2" {
   }
 }
 
-
 variable "edge_nodes" {
    type = map(string)
    default = {
