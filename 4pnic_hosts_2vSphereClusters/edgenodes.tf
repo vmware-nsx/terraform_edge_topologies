@@ -135,6 +135,7 @@ resource "vsphere_distributed_port_group" "cluster1_left_uplink1and2" {
   }
   active_uplinks  = ["Uplink 1"]
   standby_uplinks = ["Uplink 2"]
+  teaming_policy = "failover_explicit"
 }
 
 resource "vsphere_distributed_port_group" "cluster1_left_uplink3and4" {
@@ -146,6 +147,7 @@ resource "vsphere_distributed_port_group" "cluster1_left_uplink3and4" {
   }
   active_uplinks  = ["Uplink 3"]
   standby_uplinks = ["Uplink 4"]
+  teaming_policy = "failover_explicit"
 }
 
 resource "vsphere_distributed_port_group" "cluster1_right_uplink1and2" {
@@ -157,6 +159,7 @@ resource "vsphere_distributed_port_group" "cluster1_right_uplink1and2" {
   }
   active_uplinks  = ["Uplink 2"]
   standby_uplinks = ["Uplink 1"]
+  teaming_policy = "failover_explicit"
 }
 
 resource "vsphere_distributed_port_group" "cluster1_right_uplink3and4" {
@@ -168,6 +171,7 @@ resource "vsphere_distributed_port_group" "cluster1_right_uplink3and4" {
   }
   active_uplinks  = ["Uplink 4"]
   standby_uplinks = ["Uplink 3"]
+  teaming_policy = "failover_explicit"
 }
 
 
@@ -185,6 +189,7 @@ resource "vsphere_distributed_port_group" "cluster2_left_uplink1and2" {
   }
   active_uplinks  = ["Uplink 1"]
   standby_uplinks = ["Uplink 2"]
+  teaming_policy = "failover_explicit"
 }
 
 resource "vsphere_distributed_port_group" "cluster2_left_uplink3and4" {
@@ -196,6 +201,7 @@ resource "vsphere_distributed_port_group" "cluster2_left_uplink3and4" {
   }
   active_uplinks  = ["Uplink 3"]
   standby_uplinks = ["Uplink 4"]
+  teaming_policy = "failover_explicit"
 }
 
 resource "vsphere_distributed_port_group" "cluster2_right_uplink1and2" {
@@ -207,6 +213,7 @@ resource "vsphere_distributed_port_group" "cluster2_right_uplink1and2" {
   }
   active_uplinks  = ["Uplink 2"]
   standby_uplinks = ["Uplink 1"]
+  teaming_policy = "failover_explicit"
 }
 
 resource "vsphere_distributed_port_group" "cluster2_right_uplink3and4" {
@@ -218,6 +225,7 @@ resource "vsphere_distributed_port_group" "cluster2_right_uplink3and4" {
   }
   active_uplinks  = ["Uplink 4"]
   standby_uplinks = ["Uplink 3"]
+  teaming_policy = "failover_explicit"
 }
 
 
@@ -381,6 +389,24 @@ data "nsxt_compute_manager" "vcenter" {
   display_name = var.vcenter.compute_manager_name
 }
 
+
+# ----------------------------------------------- #
+#  Failure Domains
+# ----------------------------------------------- #
+
+
+resource "nsxt_failure_domain" "edgerack1" {
+  display_name            = "FD-${data.vsphere_compute_cluster.cluster1.name}"
+  preferred_edge_services = "no_preference"
+}
+
+resource "nsxt_failure_domain" "edgerack2" {
+  display_name            = "FD-${data.vsphere_compute_cluster.cluster2.name}"
+  preferred_edge_services = "no_preference"
+}
+
+
+
 # ---------------------------------------------------------------------- #
 #  Create Edges in cluster 1 connected to Uplink1 and Uplink2
 # ---------------------------------------------------------------------- #
@@ -389,6 +415,7 @@ data "nsxt_compute_manager" "vcenter" {
 resource "nsxt_edge_transport_node" "cluster1_edgenode1" {
   description  = "${data.vsphere_compute_cluster.cluster1.name} Edge node 1"
   display_name = "${data.vsphere_compute_cluster.cluster1.name}-edge-node1"
+  failure_domain = nsxt_failure_domain.edgerack1.id
   standard_host_switch {
     ip_assignment {
       static_ip_pool = data.nsxt_policy_realization_info.cluster1_tep_ip_pool.realized_id
@@ -438,6 +465,7 @@ resource "nsxt_edge_transport_node" "cluster1_edgenode1" {
 resource "nsxt_edge_transport_node" "cluster1_edgenode2" {
   description  = "${data.vsphere_compute_cluster.cluster1.name} Edge node 2"
   display_name = "${data.vsphere_compute_cluster.cluster1.name}-edge-node2"
+  failure_domain = nsxt_failure_domain.edgerack1.id
   standard_host_switch {
     ip_assignment {
       static_ip_pool = data.nsxt_policy_realization_info.cluster1_tep_ip_pool.realized_id
@@ -495,6 +523,7 @@ resource "nsxt_edge_transport_node" "cluster1_edgenode2" {
 resource "nsxt_edge_transport_node" "cluster1_edgenode3" {
   description  = "${data.vsphere_compute_cluster.cluster1.name} Edge node 3"
   display_name = "${data.vsphere_compute_cluster.cluster1.name}-edge-node3"
+  failure_domain = nsxt_failure_domain.edgerack1.id
   standard_host_switch {
     ip_assignment {
       static_ip_pool = data.nsxt_policy_realization_info.cluster1_tep_ip_pool.realized_id
@@ -546,6 +575,7 @@ resource "nsxt_edge_transport_node" "cluster1_edgenode3" {
 resource "nsxt_edge_transport_node" "cluster1_edgenode4" {
   description  = "${data.vsphere_compute_cluster.cluster1.name} Edge node 4"
   display_name = "${data.vsphere_compute_cluster.cluster1.name}-edge-node4"
+  failure_domain = nsxt_failure_domain.edgerack1.id
   standard_host_switch {
     ip_assignment {
       static_ip_pool = data.nsxt_policy_realization_info.cluster1_tep_ip_pool.realized_id
@@ -602,6 +632,7 @@ resource "nsxt_edge_transport_node" "cluster1_edgenode4" {
 resource "nsxt_edge_transport_node" "cluster2_edgenode1" {
   description  = "${data.vsphere_compute_cluster.cluster2.name} Edge node 1"
   display_name = "${data.vsphere_compute_cluster.cluster2.name}-edge-node1"
+  failure_domain = nsxt_failure_domain.edgerack2.id
   standard_host_switch {
     ip_assignment {
       static_ip_pool = data.nsxt_policy_realization_info.cluster2_tep_ip_pool.realized_id
@@ -651,6 +682,7 @@ resource "nsxt_edge_transport_node" "cluster2_edgenode1" {
 resource "nsxt_edge_transport_node" "cluster2_edgenode2" {
   description  = "${data.vsphere_compute_cluster.cluster2.name} Edge node 2"
   display_name = "${data.vsphere_compute_cluster.cluster2.name}-edge-node2"
+  failure_domain = nsxt_failure_domain.edgerack2.id
   standard_host_switch {
     ip_assignment {
       static_ip_pool = data.nsxt_policy_realization_info.cluster2_tep_ip_pool.realized_id
@@ -707,6 +739,7 @@ resource "nsxt_edge_transport_node" "cluster2_edgenode2" {
 resource "nsxt_edge_transport_node" "cluster2_edgenode3" {
   description  = "${data.vsphere_compute_cluster.cluster2.name} Edge node 3"
   display_name = "${data.vsphere_compute_cluster.cluster2.name}-edge-node3"
+  failure_domain = nsxt_failure_domain.edgerack2.id
   standard_host_switch {
     ip_assignment {
       static_ip_pool = data.nsxt_policy_realization_info.cluster2_tep_ip_pool.realized_id
@@ -757,6 +790,7 @@ resource "nsxt_edge_transport_node" "cluster2_edgenode3" {
 resource "nsxt_edge_transport_node" "cluster2_edgenode4" {
   description  = "${data.vsphere_compute_cluster.cluster2.name} Edge node 4"
   display_name = "${data.vsphere_compute_cluster.cluster2.name}-edge-node4"
+  failure_domain = nsxt_failure_domain.edgerack2.id
   standard_host_switch {
     ip_assignment {
       static_ip_pool = data.nsxt_policy_realization_info.cluster2_tep_ip_pool.realized_id
