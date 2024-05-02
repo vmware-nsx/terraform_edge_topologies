@@ -1,5 +1,4 @@
 
-
 data "nsxt_policy_edge_cluster" "edgecluster1" {
   display_name = "Edge-cluster"
   depends_on         = [nsxt_edge_cluster.edgecluster1]
@@ -51,7 +50,7 @@ resource "nsxt_policy_tier0_gateway" "t0-gateway" {
   nsx_id                   = "t0-gateway"
   failover_mode            = "PREEMPTIVE"
   default_rule_logging     = false
-  enable_firewall          = true
+  enable_firewall          = var.edge_nodes.enable_t0_firewall
   ha_mode                  = "ACTIVE_ACTIVE"
   edge_cluster_path        = data.nsxt_policy_edge_cluster.edgecluster1.path
 
@@ -113,6 +112,7 @@ resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster1-edge1-left" {
   segment_path   = nsxt_policy_segment.t0-gateway-left-cluster1.path
   subnets        = [var.vsphere_edge_cluster1.edge01_left_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 
@@ -124,6 +124,7 @@ resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster1-edge2-left" {
   segment_path   = nsxt_policy_segment.t0-gateway-left-cluster1.path
   subnets        = [var.vsphere_edge_cluster1.edge02_left_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster1-edge3-left" {
@@ -134,6 +135,7 @@ resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster1-edge3-left" {
   segment_path   = nsxt_policy_segment.t0-gateway-left-cluster1.path
   subnets        = [var.vsphere_edge_cluster1.edge03_left_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster1-edge4-left" {
@@ -144,6 +146,7 @@ resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster1-edge4-left" {
   segment_path   = nsxt_policy_segment.t0-gateway-left-cluster1.path
   subnets        = [var.vsphere_edge_cluster1.edge04_left_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 
@@ -161,6 +164,7 @@ resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster1-edge1-right" {
   segment_path   = nsxt_policy_segment.t0-gateway-right-cluster1.path
   subnets        = [var.vsphere_edge_cluster1.edge01_right_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 
@@ -172,6 +176,7 @@ resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster1-edge2-right" {
   segment_path   = nsxt_policy_segment.t0-gateway-right-cluster1.path
   subnets        = [var.vsphere_edge_cluster1.edge02_right_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster1-edge3-right" {
@@ -182,6 +187,7 @@ resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster1-edge3-right" {
   segment_path   = nsxt_policy_segment.t0-gateway-right-cluster1.path
   subnets        = [var.vsphere_edge_cluster1.edge03_right_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster1-edge4-right" {
@@ -192,6 +198,7 @@ resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster1-edge4-right" {
   segment_path   = nsxt_policy_segment.t0-gateway-right-cluster1.path
   subnets        = [var.vsphere_edge_cluster1.edge04_right_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 # ----------------------------------------------- #
@@ -207,6 +214,7 @@ resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster2-edge1-left" {
   segment_path   = nsxt_policy_segment.t0-gateway-left-cluster2.path
   subnets        = [var.vsphere_edge_cluster2.edge01_left_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster2-edge2-left" {
@@ -217,6 +225,7 @@ resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster2-edge2-left" {
   segment_path   = nsxt_policy_segment.t0-gateway-left-cluster2.path
   subnets        = [var.vsphere_edge_cluster2.edge02_left_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster2-edge3-left" {
@@ -227,6 +236,7 @@ resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster2-edge3-left" {
   segment_path   = nsxt_policy_segment.t0-gateway-left-cluster2.path
   subnets        = [var.vsphere_edge_cluster2.edge03_left_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster2-edge4-left" {
@@ -237,6 +247,7 @@ resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster2-edge4-left" {
   segment_path   = nsxt_policy_segment.t0-gateway-left-cluster2.path
   subnets        = [var.vsphere_edge_cluster2.edge04_left_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 # ----------------------------------------------- #
@@ -251,6 +262,7 @@ resource  "nsxt_policy_tier0_gateway_interface" "uplink-cluster2-edge1-right" {
   segment_path   = nsxt_policy_segment.t0-gateway-right-cluster2.path
   subnets        = [var.vsphere_edge_cluster2.edge01_right_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 
@@ -262,6 +274,7 @@ resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster2-edge2-right" {
   segment_path   = nsxt_policy_segment.t0-gateway-right-cluster2.path
   subnets        = [var.vsphere_edge_cluster2.edge02_right_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster2-edge3-right" {
@@ -272,6 +285,7 @@ resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster2-edge3-right" {
   segment_path   = nsxt_policy_segment.t0-gateway-right-cluster2.path
   subnets        = [var.vsphere_edge_cluster2.edge03_right_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster2-edge4-right" {
@@ -282,6 +296,7 @@ resource "nsxt_policy_tier0_gateway_interface" "uplink-cluster2-edge4-right" {
   segment_path   = nsxt_policy_segment.t0-gateway-right-cluster2.path
   subnets        = [var.vsphere_edge_cluster2.edge04_right_ip]
   mtu            = var.edge_nodes.uplink_mtu
+  urpf_mode      = var.edge_nodes.t0_urpf_mode
 }
 
 
@@ -351,4 +366,3 @@ resource "nsxt_policy_gateway_redistribution_config" "t0-gateway-redistribution"
     types = ["TIER0_STATIC", "TIER0_CONNECTED", "TIER0_EXTERNAL_INTERFACE", "TIER0_SEGMENT", "TIER0_ROUTER_LINK", "TIER0_SERVICE_INTERFACE", "TIER0_LOOPBACK_INTERFACE", "TIER0_DNS_FORWARDER_IP", "TIER0_IPSEC_LOCAL_IP", "TIER0_NAT", "TIER0_EVPN_TEP_IP", "TIER1_NAT", "TIER1_STATIC", "TIER1_LB_VIP", "TIER1_LB_SNAT", "TIER1_DNS_FORWARDER_IP", "TIER1_CONNECTED", "TIER1_SERVICE_INTERFACE", "TIER1_SEGMENT", "TIER1_IPSEC_LOCAL_ENDPOINT" ]
   }
 }
-
