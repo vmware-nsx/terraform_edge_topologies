@@ -2,6 +2,6 @@
 
 wewe
 
-![alt text](4pnic_hosts_2vSphereClusters/assets/Rack_layout.png)
+![alt text](4pnic_hosts_2vSphereClusters/assets/Rack_layout.png?raw=true)
 
 sswsw
