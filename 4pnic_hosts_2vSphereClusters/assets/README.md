@@ -1,1 +1,1 @@
-This folders includes diagrams
+This folder includes diagrams
