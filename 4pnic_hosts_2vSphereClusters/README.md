@@ -25,16 +25,16 @@ Edge VMs are associated with two separate NSX failure domains based on the rack 
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/peering.png)
 
 ##How to deploy the topology
-1 [Install Terraform on your workstation](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-2 Clone the repository
+1. [Install Terraform on your workstation](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+2. Clone the repository
 ```
  git clone https://github.com/vmware-nsx/terraform_edge_topologies/
 ```
-3 Navigate to this folder
+3. Navigate to this folder
 ```
 cd terraform_edge_topologies/4pnic_hosts_2vSphereClusters/
 ```
-4 Open the variable.tf file and edit the variable values based on your environment
+4. Open the variable.tf file and edit the variable values based on your environment
 ```
 vi variables.tf
 ```
@@ -149,13 +149,11 @@ variable "edge_nodes" {
    }
 }
 ```
-5 Initialize Terraform
+5. Initialize Terraform
 ```
 terraform init
 ```
-6 Start the deployment
+6. Start the deployment
 ```
 terraform apply
 ```
-
-
