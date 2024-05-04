@@ -156,6 +156,7 @@ terraform init
 6. Start the deployment
 ```
 terraform apply
+```
 
 ## Screenshot from deployment with the default values of the variable file
 This section has a screenshot from a lab environment deployed without changing the value of the variables in the variables.tf file. It should help identify where those values are applied, for example, the variables referring to the IPs used for the management interfaces and the uplinks of the edge nodes.
