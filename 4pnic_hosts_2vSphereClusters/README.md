@@ -162,7 +162,7 @@ terraform apply
 This section has screenshots from a lab environment deployed without changing the value of the variables in the variables.tf file. It should help identify where those values are applied, for example, the variables referring to the IPs used for the management interfaces and the uplinks of the edge nodes.
 
 ### VDS distributed-port-groups
-The Terraform deployment creates 4 trunk dvpgs on each VDS, two for each pair of uplinks, 1 and 2, and 3 and 4. Each dvpg is configured with an active/standby explicit failover teaming policy as described in the VDS diagram layout above.
+The Terraform deployment creates 4 trunk dvpgs on each VDS, two for each pair of uplinks, 1 and 2, and 3 and 4. Each dvpg is configured with an active/standby explicit failover teaming policy as described in the VDS diagram layout above. The management dvpg for the NSX Edge VMs must be pre-created on each VDS and referenced in the variables.tf file.
 
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/dvpgs.png)
 
