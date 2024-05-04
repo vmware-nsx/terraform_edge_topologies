@@ -171,7 +171,7 @@ Edge uplink profiles, one per rack (or vSphere cluster). Identical except for th
 
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/edge_uplink_profile_cluster2.png)
 
-Edge uplinks VLAN segments(4). Not shown in the screenshot but they use, in order, VLAN 100, 300, 200, and 400.
+Edge uplinks VLAN segments(4). Not shown in the screenshot but they use, in order, VLAN 100, 300, 200, and 400. The left segments use the teaming policy "uplink_1_only", and the right segments "uplink_2_only". The teaming policies have been added to the two edge VLAN transport zones.
 
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/uplink_vlan_segments.png)
 
