@@ -158,17 +158,21 @@ terraform init
 terraform apply
 ```
 
-## Screenshot from deployment with the default values of the variable file
+## Screenshot from a deployment using the default values of the variable file
 This section has a screenshot from a lab environment deployed without changing the value of the variables in the variables.tf file. It should help identify where those values are applied, for example, the variables referring to the IPs used for the management interfaces and the uplinks of the edge nodes.
 
 Edge VMs (8):
+
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/Edge_VMS.png)
 
 T0 Uplink interfaces (16):
+
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/T0_uplinks.png)
 
 BGP Peers (4):
+
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/BGP_PEERs.png)
 
 BGP Configuration:
+
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/BGP_Config.png)
