@@ -165,7 +165,7 @@ Edge VMs (8):
 
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/Edge_VMS.png)
 
-Edge uplinks VLAN segments(4):
+Edge uplinks VLAN segments(4). Not shown in the screenshot but they use, in order, VLAN 100, 300, 200, and 400.
 
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/uplink_vlan_segments.png)
 
