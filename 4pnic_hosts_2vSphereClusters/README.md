@@ -10,7 +10,7 @@ This folder includes the Terraform files to deploy NSX edge nodes in the followi
 * 2 edge nodes per host (Large or XL edge VM form factor recommended), 4 total per vSphere cluster, placed deterministically on a specific host via DRS should rules
 * Single Tier-0 Gateway A/A Stateless spanning all 8 edge nodes across the two racks/vSphere cluster
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/Rack_layout.png?raw=true)
-<img src="https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/Rack_layout.png" width="600" height="600">
+<img src="https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/Rack_layout.png" width="800" height="600">
 
 ## VDS Configuration
 VDSs (One per cluster) are created by the SDDC manager cluster creation workflow. An edge management dvpg must be created manually before using Terraform to deploy the edges. All other VDS configurations and dvpg creation are automated via Terraform. The objects created by Terraform are presented in blue in the diagram, and in purple/violet those that must be present in advance.
