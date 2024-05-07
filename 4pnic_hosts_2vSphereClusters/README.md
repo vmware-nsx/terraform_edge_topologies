@@ -150,6 +150,11 @@ variable "edge_nodes" {
      allow_ssh_root_login = "true"
      uplink_mtu = "9000" # Should match the MTU of the peering SVIs on the ToRs
      bgp_as = "65002" # BGP AS of the NSX T0 Gateway
+     bgp_hold_down_time = "12"
+     bgp_keep_alive_time = "3"
+     bfd_enabled = "true" #Should BFD be enabled for all the ToT BGP peers?
+     bfd_interval = "1000"
+     bfd_multiple = "4"
    }
 }
 ```
