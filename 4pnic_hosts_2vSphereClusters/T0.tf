@@ -309,12 +309,17 @@ resource "nsxt_policy_bgp_neighbor" "bgp-nei-cluster1-left" {
   display_name          = "Cluster1 Left ToR"
   bgp_path              = nsxt_policy_tier0_gateway.t0-gateway.bgp_config.0.path
   graceful_restart_mode = "HELPER_ONLY"
-  hold_down_time        = 12
-  keep_alive_time       = 3
+  hold_down_time        = var.edge_nodes.bgp_hold_down_time
+  keep_alive_time       = var.edge_nodes.bgp_keep_alive_time
   neighbor_address      = var.vsphere_edge_cluster1.tor_left_ip
   remote_as_num         = var.vsphere_edge_cluster1.tor_left_as
   route_filtering {
      address_family   = "IPV4"
+  }
+  bfd_config {
+    enabled  = var.edge_nodes.bfd_enabled
+    interval = var.edge_nodes.bfd_interval
+    multiple = var.edge_nodes.bfd_multiple
   }
 }
 
@@ -322,12 +327,17 @@ resource "nsxt_policy_bgp_neighbor" "bgp-nei-cluster1-right" {
   display_name          = "Cluster1 right ToR"
   bgp_path              = nsxt_policy_tier0_gateway.t0-gateway.bgp_config.0.path
   graceful_restart_mode = "HELPER_ONLY"
-  hold_down_time        = 12
-  keep_alive_time       = 3
+  hold_down_time        = var.edge_nodes.bgp_hold_down_time
+  keep_alive_time       = var.edge_nodes.bgp_keep_alive_time
   neighbor_address      = var.vsphere_edge_cluster1.tor_right_ip
   remote_as_num         = var.vsphere_edge_cluster1.tor_right_as
   route_filtering {
      address_family   = "IPV4"
+  }
+  bfd_config {
+    enabled  = var.edge_nodes.bfd_enabled
+    interval = var.edge_nodes.bfd_interval
+    multiple = var.edge_nodes.bfd_multiple
   }
 }
 
@@ -336,12 +346,17 @@ resource "nsxt_policy_bgp_neighbor" "bgp-nei-cluster2-left" {
   display_name          = "cluster2 Left ToR"
   bgp_path              = nsxt_policy_tier0_gateway.t0-gateway.bgp_config.0.path
   graceful_restart_mode = "HELPER_ONLY"
-  hold_down_time        = 12
-  keep_alive_time       = 3
+  hold_down_time        = var.edge_nodes.bgp_hold_down_time
+  keep_alive_time       = var.edge_nodes.bgp_keep_alive_time
   neighbor_address      = var.vsphere_edge_cluster2.tor_left_ip
   remote_as_num         = var.vsphere_edge_cluster2.tor_left_as
   route_filtering {
      address_family   = "IPV4"
+  }
+  bfd_config {
+    enabled  = var.edge_nodes.bfd_enabled
+    interval = var.edge_nodes.bfd_interval
+    multiple = var.edge_nodes.bfd_multiple
   }
 }
 
@@ -349,12 +364,17 @@ resource "nsxt_policy_bgp_neighbor" "bgp-nei-cluster2-right" {
   display_name          = "cluster2 right ToR"
   bgp_path              = nsxt_policy_tier0_gateway.t0-gateway.bgp_config.0.path
   graceful_restart_mode = "HELPER_ONLY"
-  hold_down_time        = 12
-  keep_alive_time       = 3
+  hold_down_time        = var.edge_nodes.bgp_hold_down_time
+  keep_alive_time       = var.edge_nodes.bgp_keep_alive_time
   neighbor_address      = var.vsphere_edge_cluster2.tor_right_ip
   remote_as_num         = var.vsphere_edge_cluster2.tor_right_as
   route_filtering {
      address_family   = "IPV4"
+  }
+  bfd_config {
+    enabled  = var.edge_nodes.bfd_enabled
+    interval = var.edge_nodes.bfd_interval
+    multiple = var.edge_nodes.bfd_multiple
   }
 }
 
@@ -367,3 +387,6 @@ resource "nsxt_policy_gateway_redistribution_config" "t0-gateway-redistribution"
     types = ["TIER0_STATIC", "TIER0_CONNECTED", "TIER0_EXTERNAL_INTERFACE", "TIER0_SEGMENT", "TIER0_ROUTER_LINK", "TIER0_SERVICE_INTERFACE", "TIER0_LOOPBACK_INTERFACE", "TIER0_DNS_FORWARDER_IP", "TIER0_IPSEC_LOCAL_IP", "TIER0_NAT", "TIER0_EVPN_TEP_IP", "TIER1_NAT", "TIER1_STATIC", "TIER1_LB_VIP", "TIER1_LB_SNAT", "TIER1_DNS_FORWARDER_IP", "TIER1_CONNECTED", "TIER1_SERVICE_INTERFACE", "TIER1_SEGMENT", "TIER1_IPSEC_LOCAL_ENDPOINT" ]
   }
 }
+
+
+
