@@ -15,7 +15,7 @@ This folder includes the Terraform files to deploy NSX edge nodes in the followi
 
 ## VDS Configuration
 VDSs (One per cluster) are created by the SDDC manager cluster creation workflow. An edge management dvpg must be created manually before using Terraform to deploy the edges. All other VDS configurations and dvpg creation are automated via Terraform. The objects created by Terraform are presented in blue in the diagram, and in purple/violet those that must be present in advance.
-![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/VDSs.png?raw=true)
+![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/VDS_Layout.png?raw=true)
 
 ## NSX Edge host switch configuration 
 Edge nodes are deployed following the model presented by the VCF and NSX Design guides. Only two data path interfaces are in use, both managed by the same host switch (AKA NVDS). The two data path interfaces are shared by the VLAN uplinks to the physical network and by the two TEP interfaces for overlay traffic. Please refer to the [NSX Design guide, chapter 7](https://nsx.techzone.vmware.com/resource/nsx-reference-design-guide#nsx-design-considerations) for more insight into this design. Edges in different racks are configured with different VLAN transport zones as they do not share peering VLAN segments.
