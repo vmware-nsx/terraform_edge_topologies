@@ -172,6 +172,10 @@ The Terraform deployment creates 4 trunk dvpgs on each VDS, two for each pair of
 
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/Edge_VMS.png)
 
+### Edge to host DRS Rules:
+
+![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/DRS_Rules.png)
+
 ### Edge uplink profiles
 One per rack (or vSphere cluster). Identical except for the Edge TEP VLAN:
 
