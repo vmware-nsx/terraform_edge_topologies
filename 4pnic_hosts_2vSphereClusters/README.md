@@ -9,6 +9,7 @@ This folder includes the Terraform files to deploy NSX edge nodes in the followi
 * 1 VDS per cluster, single VDS controlling all 4 pNICs
 * 2 edge nodes per host (Large or XL edge VM form factor recommended), 4 total per vSphere cluster, placed deterministically on a specific host via DRS should rules
 * Single Tier-0 Gateway A/A Stateless spanning all 8 edge nodes across the two racks/vSphere cluster
+* BGP Peering is local to the racks. The edge nodes in each rack will only peer with the ToR switches in the same rack.
 * Tier-1 gateways are not deployed as part of the deployment. They can be  added after the deployment is complete. The tier-1 gateways can be added manually or programmatically via additional Terraform files or other automation solutions (i.e., Aria Automation, vClud Director, Tanzu Supervisor cluster)
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/Rack_layout.png?raw=true)
 
