@@ -175,7 +175,7 @@ The Terraform deployment creates 4 trunk dvpgs on each VDS, two for each pair of
 
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/dvpgs.png)
 
-### VDS distributed-port-groups teamin policies 
+### VDS distributed-port-groups teaming policies 
 These screenshots present the teaming policies for the 4 trunk dvpgs created on the VDS of the cluster in the first rack
 
 #### LeftUplink1and2
