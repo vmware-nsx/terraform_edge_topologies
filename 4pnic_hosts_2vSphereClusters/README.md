@@ -175,6 +175,17 @@ The Terraform deployment creates 4 trunk dvpgs on each VDS, two for each pair of
 
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/dvpgs.png)
 
+### VDS distributed-port-groups teamin policies 
+These screenshots [resent the teaming policies for the 4 trunk dvpgs created on the VDS of the cluster in the first rack
+
+![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/dvpg_teaming_policy1.png)
+
+![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/dvpg_teaming_policy2.png)
+
+![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/dvpg_teaming_policy3.png)
+
+![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/dvpg_teaming_policy4.png)
+
 ### Edge VMs (8):
 
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/Edge_VMS.png)
