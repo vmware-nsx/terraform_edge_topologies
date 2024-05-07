@@ -24,6 +24,7 @@ Edge nodes are deployed following the model presented by the VCF and NSX Design 
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/Edge_Vm_Wiring.png)
 
 ## BGP Peering and failure domains
+BGP Peering is local to the racks. The edge nodes in each rack will only peer with the ToR switches in the same rack. BGP timers an BFS configurations can be tuned on the Terraform variable file. BGP timers are 3 and 12 by default, and BFD is enabled.
 Edge VMs are associated with two separate NSX failure domains based on the rack where they are deployed. This configuration is not relevant to the Active/Active Ter-0 gateway deployed by Terraform. If A/S stateful Tier-1 Gateways are deployed on the edge cluster, the placement of the active and standby SRs will be influenced by the failure domain configuration. The result is that no Active and Standby pair is deployed on edges in the same rack. 
 ![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/Peering.png)
 
