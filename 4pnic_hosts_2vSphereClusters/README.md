@@ -20,7 +20,7 @@ VDSs (One per cluster) are created by the SDDC manager cluster creation workflow
 ## NSX Edge host switch configuration 
 Edge nodes are deployed following the model presented by the VCF and NSX Design guides. Only two data path interfaces are in use, both managed by the same host switch (AKA NVDS). The two data path interfaces are shared by the VLAN uplinks to the physical network and by the two TEP interfaces for overlay traffic. Please refer to the [NSX Design guide, chapter 7](https://nsx.techzone.vmware.com/resource/nsx-reference-design-guide#nsx-design-considerations) for more insight into this design. Edges in different racks are configured with different VLAN transport zones as they do not share peering VLAN segments.
 
-![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/edge_vm_wiring.png)
+![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/Edge_Vm_Wiring.png)
 
 ## BGP Peering and failure domains
 Edge VMs are associated with two separate NSX failure domains based on the rack where they are deployed. This configuration is not relevant to the Active/Active Ter-0 gateway deployed by Terraform. If A/S stateful Tier-1 Gateways are deployed on the edge cluster, the placement of the active and standby SRs will be influenced by the failure domain configuration. The result is that no Active and Standby pair is deployed on edges in the same rack. 
