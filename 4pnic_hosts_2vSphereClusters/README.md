@@ -24,7 +24,7 @@ Edge nodes are deployed following the model presented by the VCF and NSX Design 
 
 ## BGP Peering and failure domains
 Edge VMs are associated with two separate NSX failure domains based on the rack where they are deployed. This configuration is not relevant to the Active/Active Ter-0 gateway deployed by Terraform. If A/S stateful Tier-1 Gateways are deployed on the edge cluster, the placement of the active and standby SRs will be influenced by the failure domain configuration. The result is that no Active and Standby pair is deployed on edges in the same rack. 
-![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/peering.png)
+![alt text](https://github.com/vmware-nsx/terraform_edge_topologies/blob/main/4pnic_hosts_2vSphereClusters/assets/Peering.png)
 
 ## How to deploy the topology
 1. [Install Terraform on your workstation](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
