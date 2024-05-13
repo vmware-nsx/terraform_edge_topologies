@@ -23,7 +23,7 @@ variable "vsphere_edge_cluster1" {
    type = map(string)
    default = {
      name   = "Cluster-01" # Name of the vSphere cluster as it appears in vCenter
-     vds    = "VDS01" # Name of the VDS dedicated to the vSphere cluster as it appears in vCneter. The VDS must manage all 4 vmnics (pNICs) 
+     vds    = "VDS01" # Name of the VDS dedicated to the vSphere cluster as it appears in vCenter. The VDS must manage all 4 vmnics (pNICs) 
      host1  = "192.168.120.151" # IP or FQDN as it appears in vCenter of the first edge host in the cluster
      host2  = "192.168.120.152" # IP or FQDN as it appears in vCenter of the second edge host in the cluster
      datastore  = "ds-site-a-nfs01" #Datastore where the edges will be deployed, same for all edges in this cluster
@@ -96,7 +96,7 @@ variable "vsphere_edge_cluster2" {
 variable "edge_nodes" {
    type = map(string)
    default = {
-     password   = "VMware1!VMware1!" #Edge nodes' initial password
+     password   = "VMware1!VMware1!" #Edge nodes' initial password (root and admin accounts)
      form_factor = "MEDIUM" # Edge nodes form factor
      enable_t0_firewall = "false" #Do you need stateless firewall on the T0? If not set to false
      t0_urpf_mode = "NONE" #STRICT or NONE 
@@ -107,7 +107,7 @@ variable "edge_nodes" {
      bgp_hold_down_time = "12"
      bgp_keep_alive_time = "4"
      bfd_enabled = "true" #Should BFD be enabled for all the ToT BGP peers?
-     bfd_interval = "1000"
-     bfd_multiple = "4"
+     bfd_interval = "500"
+     bfd_multiple = "3"
    }
 }
